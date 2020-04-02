@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "784214743886",
+    "firebase_url": "https://gilbeta.firebaseio.com",
+    "project_id": "gilbeta",
+    "storage_bucket": "gilbeta.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:784214743886:android:929a515dec134a0371dc1f",
+        "android_client_info": {
+          "package_name": "com.example.gilbeta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "784214743886-2kb3lhi9sh6he70qmqtqugvefao4pfot.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5yCjM-yokiHxzDdoSd84ijOqRLEY_u5A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "784214743886-2kb3lhi9sh6he70qmqtqugvefao4pfot.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
