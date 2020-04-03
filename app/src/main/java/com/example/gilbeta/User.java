@@ -34,6 +34,7 @@ public class User {
     public void setPhone(String phone) {
         this.phone=phone;
     }
+
     public String getUid() {
         return uid;
     }
@@ -41,4 +42,13 @@ public class User {
     public void setUid(String uid) {
         this.uid=uid;
     }
+
+    public void copyUser(User user){
+        this.name = user.getName();
+        this.email = user.getEmail();
+        this.phone = user.getPhone();
+        this.uid = user.getUid();
+    }
+
+
 }
