@@ -14,10 +14,18 @@ public class FBref {
     public static FirebaseDatabase FBDB = FirebaseDatabase.getInstance();
     public static DatabaseReference refUsers=FBDB.getReference("Users");
     public static DatabaseReference refUpload=FBDB.getReference("Upload");
-    public static FirebaseStorage FBST = FirebaseStorage.getInstance();
+
+
+
+
+    /*public static FirebaseStorage FBST = FirebaseStorage.getInstance();
     public static StorageReference refStor=FBST.getReference();
-    public static StorageReference refImages=refStor.child("Images");
+    public static StorageReference refImages=refStor.child("Images");*/
 
 
+
+    public static FirebaseStorage storage = FirebaseStorage.getInstance();
+    public static StorageReference storageRef = storage.getReference();
+    public static StorageReference pathReference = storageRef.child("Images/stars.jpg");
 
 }
