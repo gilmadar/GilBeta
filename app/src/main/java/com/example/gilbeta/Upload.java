@@ -1,10 +1,16 @@
 package com.example.gilbeta;
 
+import android.graphics.Bitmap;
+import android.net.Uri;
+
 public class Upload {
-    private String Breed, SizeDog, City, FullName, PhoneNumber, Age, Email, Description;
+    private String Breed, SizeDog, City, FullName, PhoneNumber, Age, Email, Description,DogName, UID;
     private boolean tame, Vaccinated;
+    Long SerialNumbe;
     public Upload(){}
-    public Upload( String Breed, String SizeDog, String City,  boolean tame, boolean Vaccinated, String Age, String FullName, String PhoneNumber, String Email, String Description){
+    public Upload(String Breed, String SizeDog, String City, boolean tame, boolean Vaccinated,
+                  String Age, String FullName, String PhoneNumber, String Email,
+                  String Description, String DogName, String UID, Long SerialNumbe){
         this.FullName = FullName;
         this.PhoneNumber = PhoneNumber;
         this.Email = Email;
@@ -15,6 +21,9 @@ public class Upload {
         this.Vaccinated = Vaccinated;
         this.Age = Age;
         this.Description = Description;
+        this.DogName = DogName;
+        this.UID = UID;
+        this.SerialNumbe = SerialNumbe;
 
 
     }
@@ -96,5 +105,29 @@ public class Upload {
 
     public void setDescription(String description) {
         Description = description;
+    }
+
+    public String getDogName() {
+        return DogName;
+    }
+
+    public void setDogName(String dogName) {
+        DogName = dogName;
+    }
+
+    public String getUID() {
+        return UID;
+    }
+
+    public void setUID(String UID) {
+        this.UID = UID;
+    }
+
+    public Long getSerialNumbe() {
+        return SerialNumbe;
+    }
+
+    public void setSerialNumbe(Long serialNumbe) {
+        SerialNumbe = serialNumbe;
     }
 }

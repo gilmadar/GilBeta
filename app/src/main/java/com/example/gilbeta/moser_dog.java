@@ -18,6 +18,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.speech.tts.TextToSpeech;
+import android.text.TextUtils;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
@@ -34,6 +35,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
@@ -58,30 +61,26 @@ import static com.example.gilbeta.FBref.refUpload;
 
 
 public class moser_dog extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    String Breed, SizeDog, City, Age, FullName, PhoneNumber, Email, Description;
+    String Breed, SizeDog, City, Age, FullName, PhoneNumber, Email, Description = " ", DogName, UID ;
     Boolean tame, Vaccinated;
     RadioButton rbYes, rbNo, rbYes2, rbNo2;
-    EditText etCity, age, EtDescription;
-    //User us;
+    EditText etCity, age, EtDescription, Dog;
     Upload Upload;
     User user = new User();
-
-
 
     Button btn_upload, btn_choose;
     ImageView imageView;
     Uri filePath;
     FirebaseStorage storage;
     StorageReference storageReference;
-
-
-
+    long count ;
 
     // City - מיקום
     // Breed - גזע
     // tame - מאולף/לא מאולף
     // Vaccinated - מחוסן / לא מחוסן
     //SizeDog - גודל הכלב
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,13 +93,12 @@ public class moser_dog extends AppCompatActivity implements AdapterView.OnItemSe
         rbNo2 = findViewById(R.id.rbNo2);
         etCity = findViewById(R.id.etCity);
         age = findViewById(R.id.age);
+        Dog = findViewById(R.id.Dog);
 
         btn_choose = findViewById(R.id.btn_choose);
-        btn_upload = findViewById(R.id.btn_upload);
         imageView = findViewById(R.id.myImage);
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
-
 
         EtDescription = findViewById(R.id.Description);
 
@@ -118,23 +116,12 @@ public class moser_dog extends AppCompatActivity implements AdapterView.OnItemSe
                 FullName = user.getName();
                 PhoneNumber = user.getPhone();
                 Email = user.getEmail();
+                UID = user.getUid();
+                // קורא מידע מהפיירבייס
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-
-        });
-
-
-
-
-        btn_upload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                uploadImage();
-
             }
         });
 
@@ -145,20 +132,6 @@ public class moser_dog extends AppCompatActivity implements AdapterView.OnItemSe
 
             }
         });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     } // סוגר oncreate
 
@@ -190,18 +163,6 @@ public class moser_dog extends AppCompatActivity implements AdapterView.OnItemSe
         }
     }
 
-    private void uploadImage() {
-
-
-
-    }
-
-
-
-
-
-
-
 
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         SizeDog = parent.getItemAtPosition(position).toString();
@@ -218,44 +179,6 @@ public class moser_dog extends AppCompatActivity implements AdapterView.OnItemSe
         Intent t = new Intent(this, Breed_Chooce.class);
         startActivityForResult(t, 100);
     }
-
-   /* @Override
-
-
-    public void Download(View view) throws IOException {
-        final ProgressDialog pd=ProgressDialog.show(this,"Image download","downloading...",true);
-
-        StorageReference refImg = refImages.child("aaa.jpg");
-
-        final File localFile = File.createTempFile("aaa","jpg");
-        refImg.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                pd.dismiss();
-                Toast.makeText(moser_dog.this, "Image download success", Toast.LENGTH_LONG).show();
-                String filePath = localFile.getPath();
-                Bitmap bitmap = BitmapFactory.decodeFile(filePath);
-                Iv.setImageBitmap(bitmap);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                pd.dismiss();
-                Toast.makeText(moser_dog.this, "Image download failed", Toast.LENGTH_LONG).show();
-            }
-        });
-    }*/
-
-
-
-
-    /*public void Uploadd(View view) {
-        Intent si = new Intent(Intent.ACTION_PICK,
-                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(si, Gallery);
-    }*/
-
-
 
 
     public void read(View view) {
@@ -282,42 +205,115 @@ public class moser_dog extends AppCompatActivity implements AdapterView.OnItemSe
         City = etCity.getText().toString();
         Age = age.getText().toString();
         Description = EtDescription.getText().toString();
-
-        Upload = new Upload(Breed, SizeDog, City, tame, Vaccinated, Age, FullName, PhoneNumber, Email, Description);
-        refUpload.child("Breed").child(Breed).setValue(Upload);
-        Toast.makeText(this, "Successful registration", Toast.LENGTH_LONG).show();
+        DogName = Dog.getText().toString();
 
 
 
-        if(filePath!=null){
 
-            final ProgressDialog progressDialog = new ProgressDialog(this);
-            progressDialog.setTitle("Uploading...");
-            progressDialog.show();
 
-            StorageReference reference = storageReference.child("images/*" + UUID.randomUUID().toString());
 
-            reference.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+        //Toast.makeText(moser_dog.this, " "+count, Toast.LENGTH_LONG).show();
+        if(TextUtils.isEmpty(City) || TextUtils.isEmpty(Age) || TextUtils.isEmpty(Breed) ||
+                !rbYes2.isChecked() && !rbNo2.isChecked() || !rbYes.isChecked() && !rbNo.isChecked() ){
+            Toast.makeText(this, "You must fill in all fields", Toast.LENGTH_LONG).show();
+        }
+        else {
+
+            DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference();
+            mDatabaseRef.child("Upload").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    progressDialog.dismiss();
-                    Toast.makeText(moser_dog.this, "Image Uploaded", Toast.LENGTH_LONG);
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.exists()) {
+                        count = dataSnapshot.getChildrenCount();
+                        count = count + 1;
+                        Upload = new Upload(Breed, SizeDog, City, tame, Vaccinated, Age, FullName, PhoneNumber, Email, Description, DogName, UID,count);
+                        refUpload.child(DogName).setValue(Upload);
+                        Toast.makeText(moser_dog.this, "Successful registration", Toast.LENGTH_LONG).show();
+                    }
+                    else{
+                        count = 1;
+                        Upload = new Upload(Breed, SizeDog, City, tame, Vaccinated, Age, FullName, PhoneNumber, Email, Description, DogName, UID,count);
+                        refUpload.child(DogName).setValue(Upload);
+                        Toast.makeText(moser_dog.this, "Successful registration", Toast.LENGTH_LONG).show();
+                    }
+
+
                 }
-            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+
                 @Override
-                public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
-
-                    double progres = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
-                    progressDialog.setMessage("Uploaded "+(int)progres+"%");
-
+                public void onCancelled(@NonNull DatabaseError databaseError) {
                 }
             });
+
+
 
 
         }
 
 
 
-    }
 
+
+
+        if(filePath!=null){
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setTitle("Uploading...");
+            progressDialog.show();
+            DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference();
+            mDatabaseRef.child("Upload").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.exists()) {
+                        count = dataSnapshot.getChildrenCount();
+                        count = count + 1;
+
+                        StorageReference reference = storageReference.child("" + count + ".jpg");
+                        reference.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                progressDialog.dismiss();
+                                Toast.makeText(moser_dog.this, "Image Uploaded", Toast.LENGTH_LONG);
+                            }
+                        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
+
+                                double progres = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
+                                progressDialog.setMessage("Uploaded "+(int)progres+"%");
+
+                            }
+                        });
+
+                    }
+                    else{
+                        count = 1;
+                        StorageReference reference = storageReference.child("" + count + ".jpg");
+                        reference.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                progressDialog.dismiss();
+                                Toast.makeText(moser_dog.this, "Image Uploaded", Toast.LENGTH_LONG);
+                            }
+                        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
+
+                                double progres = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
+                                progressDialog.setMessage("Uploaded "+(int)progres+"%");
+
+                            }
+                        });
+
+                    }
+
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                }
+            });
+
+        }
+    }
 }

@@ -41,7 +41,6 @@ public class Breed_Chooce extends AppCompatActivity implements AdapterView.OnIte
 
     public void Back(View view) {
         Intent BackData = new Intent(this, moser_dog.class);
-        //Breedd = BackData.getStringExtra("Breed");
         BackData.putExtra("Breed", text2);
         setResult(RESULT_OK, BackData);
         finish();
