@@ -18,6 +18,12 @@ public class FBref {
 
 
 
+
+
+
+    /*public static FirebaseStorage FBST = FirebaseStorage.getInstance();
+    public static StorageReference refStor=FBST.getReference();
+    public static StorageReference storageReference=refStor.child("Images");*/
     /*public static FirebaseStorage FBST = FirebaseStorage.getInstance();
     public static StorageReference refStor=FBST.getReference();
     public static StorageReference refImages=refStor.child("Images");*/
@@ -26,6 +32,6 @@ public class FBref {
 
     public static FirebaseStorage storage = FirebaseStorage.getInstance();
     public static StorageReference storageRef = storage.getReference();
-    public static StorageReference pathReference = storageRef.child("Images/stars.jpg");
+    //public static StorageReference pathReference = storageRef.child("Images/stars.jpg");
 
 }

@@ -26,7 +26,7 @@ import static com.example.gilbeta.FBref.refUpload;
         ListView lv;
         ArrayList<String> als = new ArrayList<>();
         ArrayList<Upload> alupload = new ArrayList<>();
-
+        long count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,11 +79,6 @@ import static com.example.gilbeta.FBref.refUpload;
 
 
 
-
-
-
-
-
             dt.putExtra("Breed", up.getBreed());
             dt.putExtra("Age", up.getAge());
             dt.putExtra("City", up.getCity());
@@ -95,6 +90,7 @@ import static com.example.gilbeta.FBref.refUpload;
             dt.putExtra("SizeDog", up.getSizeDog());
             dt.putExtra("tame", up.gettame());
             dt.putExtra("Vaccinated", up.getVaccinated());
+            dt.putExtra("count", up.getSerialNumbe());
 
             startActivity(dt);
 

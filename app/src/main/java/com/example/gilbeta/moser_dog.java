@@ -267,7 +267,9 @@ public class moser_dog extends AppCompatActivity implements AdapterView.OnItemSe
                         count = dataSnapshot.getChildrenCount();
                         count = count + 1;
 
-                        StorageReference reference = storageReference.child("" + count + ".jpg");
+                        //StorageReference reference = storageReference.child("" + count + ".jpg");
+                        StorageReference reference = storageReference.child("shoshe.jpg");
+
                         reference.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
                             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
