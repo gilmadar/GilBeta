@@ -5,12 +5,12 @@ import android.net.Uri;
 
 public class Upload {
     private String Breed, SizeDog, City, FullName, PhoneNumber, Age, Email, Description,DogName, UID;
-    private boolean tame, Vaccinated;
+    private boolean tame, Vaccinated,act;
     Long SerialNumbe;
     public Upload(){}
     public Upload(String Breed, String SizeDog, String City, boolean tame, boolean Vaccinated,
                   String Age, String FullName, String PhoneNumber, String Email,
-                  String Description, String DogName, String UID, Long SerialNumbe){
+                  String Description, String DogName, String UID, Long SerialNumbe, boolean act){
         this.FullName = FullName;
         this.PhoneNumber = PhoneNumber;
         this.Email = Email;
@@ -24,6 +24,7 @@ public class Upload {
         this.DogName = DogName;
         this.UID = UID;
         this.SerialNumbe = SerialNumbe;
+        this.act = act;
 
 
     }
@@ -129,5 +130,30 @@ public class Upload {
 
     public void setSerialNumbe(Long serialNumbe) {
         SerialNumbe = serialNumbe;
+    }
+
+    public boolean isAct() {
+        return act;
+    }
+
+    public void setAct(boolean act) {
+        this.act = act;
+    }
+
+    public void copyUpload(Upload upload){
+        this.FullName = upload.getFullName();
+        this.PhoneNumber = upload.getPhoneNumber();
+        this.Email = upload.getEmail();
+        this.Breed = upload.getBreed();
+        this.SizeDog = upload.getSizeDog();
+        this.City = upload.getCity();
+        this.tame = upload.gettame();
+        this.Vaccinated = upload.getVaccinated();
+        this.Age = Age;
+        this.Description = upload.getDescription();
+        this.DogName = upload.getDogName();
+        this.UID = upload.getUID();
+        this.SerialNumbe = upload.getSerialNumbe();
+
     }
 }

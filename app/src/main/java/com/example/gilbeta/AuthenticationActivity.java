@@ -24,6 +24,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import static com.example.gilbeta.FBref.refAuth;
 import static com.example.gilbeta.FBref.refUsers;
@@ -37,7 +42,8 @@ public class AuthenticationActivity extends AppCompatActivity {
 
     String name, phone, email, password, uid;
     User userdb;
-    Boolean stayConnect, registered, firstrun;
+    Boolean stayConnect, registered;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +69,7 @@ public class AuthenticationActivity extends AppCompatActivity {
         SharedPreferences settings=getSharedPreferences("PREFS_NAME",MODE_PRIVATE);
         Boolean isChecked=settings.getBoolean("stayConnect",false);
         Intent si = new Intent(AuthenticationActivity.this,choose.class);
+        si.putExtra("newuser",false);
         if (refAuth.getCurrentUser()!=null && isChecked) {
             stayConnect=true;
             startActivity(si);
@@ -131,7 +138,9 @@ public class AuthenticationActivity extends AppCompatActivity {
                                 editor.commit();
                                 Log.d("MainActivity", "signinUserWithEmail:success");
                                 Toast.makeText(AuthenticationActivity.this, "Login Success", Toast.LENGTH_LONG).show();
+                                //ניסיון
                                 Intent si = new Intent(AuthenticationActivity.this,choose.class);
+                                si.putExtra("newuser",false);
                                 startActivity(si);
                             } else {
                                 Log.d("MainActivity", "signinUserWithEmail:fail");
@@ -163,6 +172,7 @@ public class AuthenticationActivity extends AppCompatActivity {
                                 refUsers.child(uid).setValue(userdb);
                                 Toast.makeText(AuthenticationActivity.this, "Successful registration", Toast.LENGTH_LONG).show();
                                 Intent si = new Intent(AuthenticationActivity.this,choose.class);
+                                si.putExtra("newuser",true);
                                 startActivity(si);
                             } else {
                                 if (task.getException() instanceof FirebaseAuthUserCollisionException)

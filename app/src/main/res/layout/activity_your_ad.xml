@@ -2,34 +2,36 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".moser_dog">
+    tools:context=".YourAd">
 
     <EditText
-        android:id="@+id/Dog"
+        android:id="@+id/Dog2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:textStyle="bold"
         android:ems="10"
         android:inputType="textPersonName"
+        android:textColorHint="#000000"
         android:hint="The Name Of The Dog:"
-         />
-
+        />
 
 
     <EditText
-        android:id="@+id/age"
+        android:id="@+id/age2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:hint="Age:"
-        android:textStyle="bold"
         android:ems="10"
-        android:inputType="numberDecimal" />
+        android:hint="Age:"
+        android:inputType="numberDecimal"
+        android:textColor="#000000"
 
+        android:textColorHint="#000000"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layoutDirection="ltr"
@@ -39,12 +41,14 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tame"
+            android:id="@+id/tame2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:textStyle="bold"
-            android:text="Tame?" />
+            android:textColor="#000000"
+
+            android:text="Tame: " />
 
         <RadioGroup
             android:layout_width="0dp"
@@ -54,14 +58,14 @@
             android:orientation="vertical">
 
             <RadioButton
-                android:id="@+id/rbYes"
+                android:id="@+id/rbYes3"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="0.5"
                 android:text="Yes" />
 
             <RadioButton
-                android:id="@+id/rbNo"
+                android:id="@+id/rbNo3"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="0.5"
@@ -84,7 +88,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:textStyle="bold"
-            android:text="vaccinated?" />
+            android:textColor="#000000"
+
+            android:text="vaccinated: " />
 
         <RadioGroup
             android:layout_width="0dp"
@@ -94,7 +100,7 @@
             android:orientation="vertical">
 
             <RadioButton
-                android:id="@+id/rbYes2"
+                android:id="@+id/rbYes4"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="0.5"
@@ -102,7 +108,7 @@
 
 
             <RadioButton
-                android:id="@+id/rbNo2"
+                android:id="@+id/rbNo4"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="0.5"
@@ -124,14 +130,14 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:textStyle="bold"
-            android:text="Size?" />
+            android:textColor="#000000"
+
+            android:text="Size: " />
 
         <Spinner
-            android:id="@+id/size_spinner"
-
+            android:id="@+id/size_spinner2"
             android:layout_width="0dp"
             android:layout_weight="4"
-
             android:layout_height="wrap_content"
 
             />
@@ -139,12 +145,15 @@
 
 
     <EditText
-        android:id="@+id/etCity"
+        android:id="@+id/etCity2"
         android:hint="Which city the dog is in:"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:ems="10"
+        android:textColor="#000000"
+
+        android:textColorHint="#000000"
         android:textStyle="bold"
         android:inputType="textPersonName" />
 
@@ -157,22 +166,23 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/tvbreed2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:layout_weight="7"
+            android:textColor="#000000"
+            android:layout_weight="5"
             android:text="To select the dog breed, click the breed button" />
 
         <Button
-            android:id="@+id/breed"
+            android:id="@+id/breed2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:background="@drawable/custom3"
             android:onClick="FindBreed"
             android:textStyle="bold"
-            android:text="breed" />
+            android:text="to change breed" />
 
     </LinearLayout>
 
@@ -184,7 +194,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/myImage"
+            android:id="@+id/myImage2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"
@@ -203,13 +213,13 @@
                 android:layout_weight="0.5" />
 
             <Button
-                android:id="@+id/btn_choose"
+                android:id="@+id/btn_choose2"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:background="@drawable/custom3"
                 android:textStyle="bold"
-                android:text="Choose image" />
+                android:text="to change image" />
 
             <Space
                 android:layout_width="match_parent"
@@ -221,13 +231,15 @@
     </LinearLayout>
 
     <EditText
-        android:id="@+id/Description"
+        android:id="@+id/Description2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
         android:ems="10"
         android:hint="More details about the dog:"
         android:textStyle="bold"
+        android:textColorHint="#000000"
+        android:textColor="#000000"
         android:inputType="textPersonName" />
 
     <Space
@@ -235,15 +247,41 @@
         android:layout_height="0dp"
         android:layout_weight="0.5"/>
 
-    <Button
-        android:id="@+id/btn"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:onClick="read"
-        android:textStyle="bold"
-        android:background="@drawable/custom3"
-        android:text="Button" />
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="read"
+            android:textStyle="bold"
+            android:text="Change" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textStyle="bold"
+
+            android:onClick="del"
+            android:text="Delete" />
+
+        <Button
+            android:id="@+id/button6"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textStyle="bold"
+
+            android:onClick="back"
+            android:text="back" />
+    </LinearLayout>
 
 
 </LinearLayout>

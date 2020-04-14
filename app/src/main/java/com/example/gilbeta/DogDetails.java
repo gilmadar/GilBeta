@@ -14,6 +14,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -45,7 +46,6 @@ public class DogDetails extends AppCompatActivity {
      boolean tame, Vaccinated;
      ImageView imageView;
      long count;
-     public Uri imguri;
 
      TextView tvBreed, tvSize, tvCity, tvAge, tvDescription, tvDogName, tvtame, tvVaccinated;
 
@@ -117,6 +117,37 @@ public class DogDetails extends AppCompatActivity {
         mStorageRef = FirebaseStorage.getInstance().getReference();
         DownloadImg();
 
+        //שקד
+
+        Button mShowDialog = (Button) findViewById(R.id.BtnDetails);
+        mShowDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(DogDetails.this);
+                View mView = getLayoutInflater().inflate(R.layout.my_dialog, null);
+                final TextView mEmail = (TextView) mView.findViewById(R.id.tvemail);
+                final TextView mPhone = (TextView) mView.findViewById(R.id.tvphone);
+                final TextView mName = (TextView) mView.findViewById(R.id.tvname);
+
+                mEmail.setText("Email: " + Email);
+                mPhone.setText("Phone Number: " + PhoneNumber);
+                mName.setText("Full Name : " + FullName);
+
+
+                Button btnClose = (Button) mView.findViewById(R.id.btnClose);
+                mBuilder.setView(mView);
+                final AlertDialog dialog = mBuilder.create();
+                dialog.show();
+                btnClose.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+            }
+        });
+
+
 
 
     }
@@ -125,7 +156,6 @@ public class DogDetails extends AppCompatActivity {
 
 
     private void DownloadImg() {// a method that downloads the url of the last added image
-        //Ref = mStorageRef.child("shoshe.jpg");
         Ref = mStorageRef.child("" + count + ".jpg");
         Ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>(){
             @Override
@@ -144,58 +174,6 @@ public class DogDetails extends AppCompatActivity {
 
     }
 
-    public void ShowDetails(View view){
-
-    }
 
 
-
-
-
-
-
-
-
-
-    /*public void ShowDetails(View view) throws IOException {
-
-
-        Toast.makeText(DogDetails.this, ""+count, Toast.LENGTH_LONG).show();
-        final ProgressDialog pd=ProgressDialog.show(this,"Image download","downloading...",true);
-
-        /*StorageReference reference = storageReference.child("" + count + ".jpg");
-        final File localFile = File.createTempFile(""+count,"jpg");*/
-
-
-
-        /*StorageReference reference = storageReference.child("shoshe.jpg");
-        final File localFile = File.createTempFile("shoshe","jpg");*/
-
-
-
-        /*reference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                pd.dismiss();
-                Toast.makeText(DogDetails.this, "Image download success", Toast.LENGTH_LONG).show();
-                String filePath = localFile.getPath();
-                Bitmap bitmap = BitmapFactory.decodeFile(filePath);
-                imageView.setImageBitmap(bitmap);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                pd.dismiss();
-                Toast.makeText(DogDetails.this, "Image download failed", Toast.LENGTH_LONG).show();
-            }
-        });
-
-
-
-
-
-
-
-
-    }*/
 }

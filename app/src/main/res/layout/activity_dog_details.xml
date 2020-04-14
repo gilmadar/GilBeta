@@ -13,6 +13,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:textColor="#000000"
+
+        android:textStyle="bold"
         android:text="TextView" />
 
     <TextView
@@ -20,6 +23,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:textStyle="bold"
+        android:textColor="#000000"
+
         android:text="TextView" />
 
     <TextView
@@ -27,12 +33,18 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:textColor="#000000"
+
+        android:textStyle="bold"
         android:text="TextView" />
 
     <TextView
         android:id="@+id/tvtame"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+
         android:layout_weight="1"
         android:text="TextView" />
 
@@ -40,6 +52,9 @@
         android:id="@+id/tvVaccinated"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+
         android:layout_weight="1"
         android:text="TextView" />
 
@@ -48,13 +63,19 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:textStyle="bold"
+        android:textColor="#000000"
+
         android:text="TextView" />
 
     <TextView
         android:id="@+id/tvCity"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:textStyle="bold"
         android:layout_weight="1"
+        android:textColor="#000000"
+
         android:text="TextView" />
 
     <TextView
@@ -62,20 +83,23 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="3"
+        android:textStyle="bold"
+        android:textColor="#000000"
+
         android:text="TextView" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="6"
-        app:srcCompat="@drawable/ic_launcher_foreground" />
+        android:layout_weight="7" />
 
     <Button
         android:id="@+id/BtnDetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="ShowDetails"
-        android:text="Button" />
+        android:background="@drawable/custom3"
+        android:textStyle="bold"
+        android:text="To see the details of the advertiser click here" />
 
 </LinearLayout>

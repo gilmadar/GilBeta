@@ -68,7 +68,7 @@ public class moser_dog extends AppCompatActivity implements AdapterView.OnItemSe
     Upload Upload;
     User user = new User();
 
-    Button btn_upload, btn_choose;
+    Button btn_choose;
     ImageView imageView;
     Uri filePath;
     FirebaseStorage storage;
@@ -94,6 +94,7 @@ public class moser_dog extends AppCompatActivity implements AdapterView.OnItemSe
         etCity = findViewById(R.id.etCity);
         age = findViewById(R.id.age);
         Dog = findViewById(R.id.Dog);
+
 
         btn_choose = findViewById(R.id.btn_choose);
         imageView = findViewById(R.id.myImage);
@@ -124,6 +125,7 @@ public class moser_dog extends AppCompatActivity implements AdapterView.OnItemSe
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
+
 
         btn_choose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -214,7 +216,7 @@ public class moser_dog extends AppCompatActivity implements AdapterView.OnItemSe
 
         //Toast.makeText(moser_dog.this, " "+count, Toast.LENGTH_LONG).show();
         if(TextUtils.isEmpty(City) || TextUtils.isEmpty(Age) || TextUtils.isEmpty(Breed) ||
-                !rbYes2.isChecked() && !rbNo2.isChecked() || !rbYes.isChecked() && !rbNo.isChecked() ){
+                (!rbYes2.isChecked() && !rbNo2.isChecked()) || (!rbYes.isChecked() && !rbNo.isChecked()) ||  SizeDog.equals("None")){
             Toast.makeText(this, "You must fill in all fields", Toast.LENGTH_LONG).show();
         }
         else {
@@ -226,15 +228,20 @@ public class moser_dog extends AppCompatActivity implements AdapterView.OnItemSe
                     if(dataSnapshot.exists()) {
                         count = dataSnapshot.getChildrenCount();
                         count = count + 1;
-                        Upload = new Upload(Breed, SizeDog, City, tame, Vaccinated, Age, FullName, PhoneNumber, Email, Description, DogName, UID,count);
-                        refUpload.child(DogName).setValue(Upload);
+                        Upload = new Upload(Breed, SizeDog, City, tame, Vaccinated, Age, FullName, PhoneNumber, Email, Description, DogName, UID,count, true);
+                        refUpload.child(""+count).setValue(Upload);
                         Toast.makeText(moser_dog.this, "Successful registration", Toast.LENGTH_LONG).show();
+                        Intent it = new Intent(moser_dog.this, profile.class);
+                        startActivity(it);
                     }
                     else{
                         count = 1;
-                        Upload = new Upload(Breed, SizeDog, City, tame, Vaccinated, Age, FullName, PhoneNumber, Email, Description, DogName, UID,count);
-                        refUpload.child(DogName).setValue(Upload);
+                        Upload = new Upload(Breed, SizeDog, City, tame, Vaccinated, Age, FullName, PhoneNumber, Email, Description, DogName, UID,count, true);
+                        refUpload.child(""+count).setValue(Upload);
                         Toast.makeText(moser_dog.this, "Successful registration", Toast.LENGTH_LONG).show();
+                        Intent it2 = new Intent(moser_dog.this, profile.class);
+                        startActivity(it2);
+
                     }
 
 
@@ -267,8 +274,8 @@ public class moser_dog extends AppCompatActivity implements AdapterView.OnItemSe
                         count = dataSnapshot.getChildrenCount();
                         count = count + 1;
 
-                        //StorageReference reference = storageReference.child("" + count + ".jpg");
-                        StorageReference reference = storageReference.child("shoshe.jpg");
+                        StorageReference reference = storageReference.child("" + count + ".jpg");
+                        //StorageReference reference = storageReference.child("shoshe.jpg");
 
                         reference.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
