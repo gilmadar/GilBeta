@@ -19,6 +19,8 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.speech.tts.TextToSpeech;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
@@ -28,6 +30,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -67,6 +70,7 @@ public class moser_dog extends AppCompatActivity implements AdapterView.OnItemSe
     EditText etCity, age, EtDescription, Dog;
     Upload Upload;
     User user = new User();
+    TextView tvBreed;
 
     Button btn_choose;
     ImageView imageView;
@@ -94,6 +98,8 @@ public class moser_dog extends AppCompatActivity implements AdapterView.OnItemSe
         etCity = findViewById(R.id.etCity);
         age = findViewById(R.id.age);
         Dog = findViewById(R.id.Dog);
+        tvBreed = findViewById(R.id.tvBreed);
+
 
 
         btn_choose = findViewById(R.id.btn_choose);
@@ -146,9 +152,11 @@ public class moser_dog extends AppCompatActivity implements AdapterView.OnItemSe
 
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 100) {
+        if (requestCode == 100 && resultCode == RESULT_OK) {
             Breed = data.getStringExtra("Breed");
+            tvBreed.setText("The breed of the dog: " + Breed);
             Toast.makeText(this, Breed, Toast.LENGTH_SHORT).show();
+
 
         }
 
@@ -214,7 +222,6 @@ public class moser_dog extends AppCompatActivity implements AdapterView.OnItemSe
 
 
 
-        //Toast.makeText(moser_dog.this, " "+count, Toast.LENGTH_LONG).show();
         if(TextUtils.isEmpty(City) || TextUtils.isEmpty(Age) || TextUtils.isEmpty(Breed) ||
                 (!rbYes2.isChecked() && !rbNo2.isChecked()) || (!rbYes.isChecked() && !rbNo.isChecked()) ||  SizeDog.equals("None")){
             Toast.makeText(this, "You must fill in all fields", Toast.LENGTH_LONG).show();
@@ -230,7 +237,7 @@ public class moser_dog extends AppCompatActivity implements AdapterView.OnItemSe
                         count = count + 1;
                         Upload = new Upload(Breed, SizeDog, City, tame, Vaccinated, Age, FullName, PhoneNumber, Email, Description, DogName, UID,count, true);
                         refUpload.child(""+count).setValue(Upload);
-                        Toast.makeText(moser_dog.this, "Successful registration", Toast.LENGTH_LONG).show();
+                        Toast.makeText(moser_dog.this, "Successful upload", Toast.LENGTH_LONG).show();
                         Intent it = new Intent(moser_dog.this, profile.class);
                         startActivity(it);
                     }
@@ -238,7 +245,7 @@ public class moser_dog extends AppCompatActivity implements AdapterView.OnItemSe
                         count = 1;
                         Upload = new Upload(Breed, SizeDog, City, tame, Vaccinated, Age, FullName, PhoneNumber, Email, Description, DogName, UID,count, true);
                         refUpload.child(""+count).setValue(Upload);
-                        Toast.makeText(moser_dog.this, "Successful registration", Toast.LENGTH_LONG).show();
+                        Toast.makeText(moser_dog.this, "Successful upload", Toast.LENGTH_LONG).show();
                         Intent it2 = new Intent(moser_dog.this, profile.class);
                         startActivity(it2);
 
@@ -275,7 +282,6 @@ public class moser_dog extends AppCompatActivity implements AdapterView.OnItemSe
                         count = count + 1;
 
                         StorageReference reference = storageReference.child("" + count + ".jpg");
-                        //StorageReference reference = storageReference.child("shoshe.jpg");
 
                         reference.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
@@ -284,14 +290,14 @@ public class moser_dog extends AppCompatActivity implements AdapterView.OnItemSe
                                 Toast.makeText(moser_dog.this, "Image Uploaded", Toast.LENGTH_LONG);
                             }
                         }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
+                        @Override
+                        public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
 
-                                double progres = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
-                                progressDialog.setMessage("Uploaded "+(int)progres+"%");
+                            double progres = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
+                            progressDialog.setMessage("Uploaded "+(int)progres+"%");
 
-                            }
-                        });
+                        }
+                    });
 
                     }
                     else{
@@ -325,4 +331,34 @@ public class moser_dog extends AppCompatActivity implements AdapterView.OnItemSe
 
         }
     }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        String s = item.getTitle().toString();
+        Intent t;
+
+        if (s.equals("To upload an ad")) {
+            t = new Intent(this, moser_dog.class);
+            startActivity(t);
+        }
+
+        if (s.equals("Look for a dog")) {
+            t = new Intent(this, mehmezh_dog.class);
+            startActivity(t);
+        }
+        if (s.equals("Profile")) {
+            t = new Intent(this, profile.class);
+            startActivity(t);
+        }
+        if (s.equals("Credits")) {
+            t = new Intent(this, Credits.class);
+            startActivity(t);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

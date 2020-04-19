@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background2"
     android:orientation="vertical"
     tools:context=".DogDetails">
 
@@ -13,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:textColor="#000000"
+        android:gravity="center"
+        android:textColor="#ffffff"
 
         android:textStyle="bold"
         android:text="TextView" />
@@ -24,7 +26,8 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:textStyle="bold"
-        android:textColor="#000000"
+        android:gravity="center"
+        android:textColor="#ffffff"
 
         android:text="TextView" />
 
@@ -33,7 +36,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:textColor="#000000"
+        android:gravity="center"
+        android:textColor="#ffffff"
 
         android:textStyle="bold"
         android:text="TextView" />
@@ -43,7 +47,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:textStyle="bold"
-        android:textColor="#000000"
+        android:gravity="center"
+        android:textColor="#ffffff"
 
         android:layout_weight="1"
         android:text="TextView" />
@@ -53,7 +58,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:textStyle="bold"
-        android:textColor="#000000"
+        android:gravity="center"
+        android:textColor="#ffffff"
 
         android:layout_weight="1"
         android:text="TextView" />
@@ -62,9 +68,10 @@
         android:id="@+id/tvSize"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:gravity="center"
         android:layout_weight="1"
         android:textStyle="bold"
-        android:textColor="#000000"
+        android:textColor="#ffffff"
 
         android:text="TextView" />
 
@@ -73,8 +80,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:textStyle="bold"
+        android:gravity="center"
         android:layout_weight="1"
-        android:textColor="#000000"
+        android:textColor="#ffffff"
 
         android:text="TextView" />
 
@@ -83,8 +91,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="3"
+        android:gravity="center"
         android:textStyle="bold"
-        android:textColor="#000000"
+        android:textColor="#ffffff"
 
         android:text="TextView" />
 
@@ -98,7 +107,7 @@
         android:id="@+id/BtnDetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/custom3"
+        android:background="@drawable/btnbackgrounds"
         android:textStyle="bold"
         android:text="To see the details of the advertiser click here" />
 

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/itUpload"
+        android:title="To upload an ad" />
+    <item
+        android:id="@+id/itmemezh"
+        android:title="Look for a dog" />
+    <item
+        android:id="@+id/itProfile"
+        android:title="Profile" />
+    <item
+        android:id="@+id/itCred"
+        android:title="Credits" />
+
+</menu>

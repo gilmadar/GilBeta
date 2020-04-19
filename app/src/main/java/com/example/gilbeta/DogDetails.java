@@ -12,6 +12,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -49,12 +51,11 @@ public class DogDetails extends AppCompatActivity {
 
      TextView tvBreed, tvSize, tvCity, tvAge, tvDescription, tvDogName, tvtame, tvVaccinated;
 
-    LinearLayout mydialog;
     AlertDialog.Builder alert;
 
 
-    ArrayList<String> als = new ArrayList<>();
-    ArrayList<Upload> alupload = new ArrayList<>();
+    //ArrayList<String> als = new ArrayList<>();
+    //ArrayList<Upload> alupload = new ArrayList<>();
 
 
     // היקלי
@@ -172,6 +173,35 @@ public class DogDetails extends AppCompatActivity {
             }
         });
 
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        String s = item.getTitle().toString();
+        Intent t;
+
+        if (s.equals("To upload an ad")) {
+            t = new Intent(this, moser_dog.class);
+            startActivity(t);
+        }
+
+        if (s.equals("Look for a dog")) {
+            t = new Intent(this, mehmezh_dog.class);
+            startActivity(t);
+        }
+        if (s.equals("Profile")) {
+            t = new Intent(this, profile.class);
+            startActivity(t);
+        }
+        if (s.equals("Credits")) {
+            t = new Intent(this, Credits.class);
+            startActivity(t);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 

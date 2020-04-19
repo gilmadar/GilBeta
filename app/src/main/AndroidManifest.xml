@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".YourAd"></activity>
+        <activity android:name=".Credits"></activity>
+        <activity android:name=".YourAd" />
         <activity android:name=".profile" />
         <activity android:name=".DogDetails" />
         <activity android:name=".Breed_Chooce" />

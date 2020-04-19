@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -173,5 +175,34 @@ public class profile extends AppCompatActivity implements AdapterView.OnItemSele
     public void tomoser(View view) {
         Intent t = new Intent(this, moser_dog.class);
         startActivity(t);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        String s = item.getTitle().toString();
+        Intent t;
+
+        if (s.equals("To upload an ad")) {
+            t = new Intent(this, moser_dog.class);
+            startActivity(t);
+        }
+
+        if (s.equals("Look for a dog")) {
+            t = new Intent(this, mehmezh_dog.class);
+            startActivity(t);
+        }
+        if (s.equals("Profile")) {
+            t = new Intent(this, profile.class);
+            startActivity(t);
+        }
+        if (s.equals("Credits")) {
+            t = new Intent(this, Credits.class);
+            startActivity(t);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

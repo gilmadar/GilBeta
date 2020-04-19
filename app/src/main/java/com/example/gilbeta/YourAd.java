@@ -13,6 +13,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -49,7 +51,7 @@ public class YourAd extends AppCompatActivity implements AdapterView.OnItemSelec
     long SerialNumbe;
     EditText etCity2, age2, EtDescription2, Dog2;
     RadioButton rbYes3, rbNo3, rbYes4, rbNo4;
-    TextView tvbreed2;
+    TextView tvbreed2,size;
     ImageView myImage2;
     Button btn_choose2;
     AlertDialog.Builder adb;
@@ -76,6 +78,7 @@ public class YourAd extends AppCompatActivity implements AdapterView.OnItemSelec
         Dog2 = findViewById(R.id.Dog2);
         EtDescription2 = findViewById(R.id.Description2);
         tvbreed2 = findViewById(R.id.tvbreed2);
+        size= findViewById(R.id.size);
 
         myImage2 = findViewById(R.id.myImage2);
         Spinner size_spinner2 = findViewById(R.id.size_spinner2);
@@ -87,7 +90,6 @@ public class YourAd extends AppCompatActivity implements AdapterView.OnItemSelec
         mStorageRef = FirebaseStorage.getInstance().getReference();
 
         DogName = dt.getStringExtra("DogNmae");
-        //Toast.makeText(YourAd.this, ""+ DogName, Toast.LENGTH_SHORT).show();
         Query query = refUpload
                 .orderByChild("dogName")
                 .equalTo(DogName);
@@ -114,7 +116,7 @@ public class YourAd extends AppCompatActivity implements AdapterView.OnItemSelec
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == 200){
+        if(requestCode == 200 && resultCode == RESULT_OK){
             Breed = data.getStringExtra("Breed");
             tvbreed2.setText("The breed of the dog: " + Breed);
         }
@@ -154,6 +156,7 @@ public class YourAd extends AppCompatActivity implements AdapterView.OnItemSelec
             Dog2.setHint("The Name Of The Dog: " + DogName);
             age2.setHint("Age: " + Age);
             EtDescription2.setHint("More details about the dog: " +Description);
+            size.setText("The dog size: " + SizeDog);
             if(tame)
                 rbYes3.setChecked(true);
             else
@@ -271,7 +274,6 @@ public class YourAd extends AppCompatActivity implements AdapterView.OnItemSelec
     public void FindBreed(View view) {
         Intent t = new Intent(this, Breed_Chooce.class);
         startActivityForResult(t, 200);
-        //startActivity(t);
     }
 
     public void del(View view) {
@@ -303,5 +305,35 @@ public class YourAd extends AppCompatActivity implements AdapterView.OnItemSelec
         Intent g = new Intent(this, profile.class);
         startActivity(g);
     }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        String s = item.getTitle().toString();
+        Intent t;
+
+        if (s.equals("To upload an ad")) {
+            t = new Intent(this, moser_dog.class);
+            startActivity(t);
+        }
+
+        if (s.equals("Look for a dog")) {
+            t = new Intent(this, mehmezh_dog.class);
+            startActivity(t);
+        }
+        if (s.equals("Profile")) {
+            t = new Intent(this, profile.class);
+            startActivity(t);
+        }
+        if (s.equals("Credits")) {
+            t = new Intent(this, Credits.class);
+            startActivity(t);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }
 

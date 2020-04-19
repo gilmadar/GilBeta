@@ -14,8 +14,7 @@ public class Breed_Chooce extends AppCompatActivity implements AdapterView.OnIte
 
 
     ListView lv;
-    String Breedd, text2;
-    int act;
+    String text2;
 
 
     @Override

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background2"
     android:orientation="vertical"
     tools:context=".moser_dog">
 
@@ -13,11 +14,13 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:textStyle="bold"
+        android:gravity="center"
+        android:textColorHint="#000000"
+        android:textColor="#000000"
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="The Name Of The Dog:"
          />
-
 
 
     <EditText
@@ -25,11 +28,13 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:hint="Age:"
-        android:textStyle="bold"
         android:ems="10"
-        android:inputType="numberDecimal" />
-
+        android:gravity="center"
+        android:hint="Age:"
+        android:inputType="numberDecimal"
+        android:textColor="#000000"
+        android:textColorHint="#000000"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layoutDirection="ltr"
@@ -43,8 +48,10 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            android:textStyle="bold"
-            android:text="Tame?" />
+            android:gravity="center"
+            android:text="Tame?"
+            android:textColor="#000000"
+            android:textStyle="bold" />
 
         <RadioGroup
             android:layout_width="0dp"
@@ -57,6 +64,7 @@
                 android:id="@+id/rbYes"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:textColor="#000000"
                 android:layout_weight="0.5"
                 android:text="Yes" />
 
@@ -64,12 +72,17 @@
                 android:id="@+id/rbNo"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:textColor="#000000"
                 android:layout_weight="0.5"
                 android:text="No" />
         </RadioGroup>
 
 
     </LinearLayout>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.25" />
     <LinearLayout
         android:layoutDirection="ltr"
         android:layout_width="match_parent"
@@ -84,11 +97,14 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="#000000"
             android:text="vaccinated?" />
 
         <RadioGroup
             android:layout_width="0dp"
             android:layout_weight="1"
+            android:textColor="#000000"
 
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -97,6 +113,7 @@
                 android:id="@+id/rbYes2"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:textColor="#000000"
                 android:layout_weight="0.5"
                 android:text="Yes" />
 
@@ -105,6 +122,7 @@
                 android:id="@+id/rbNo2"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:textColor="#000000"
                 android:layout_weight="0.5"
                 android:text="No" />
         </RadioGroup>
@@ -124,6 +142,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="#000000"
             android:text="Size?" />
 
         <Spinner
@@ -144,6 +164,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:gravity="center"
+        android:textColorHint="#000000"
+        android:textColor="#000000"
         android:ems="10"
         android:textStyle="bold"
         android:inputType="textPersonName" />
@@ -157,11 +180,13 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/tvBreed"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:textStyle="bold"
-            android:layout_weight="7"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:layout_weight="8"
             android:text="To select the dog breed, click the breed button" />
 
         <Button
@@ -169,7 +194,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:background="@drawable/custom3"
+            android:background="@drawable/btnbackgrounds"
             android:onClick="FindBreed"
             android:textStyle="bold"
             android:text="breed" />
@@ -207,7 +232,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:background="@drawable/custom3"
+                android:background="@drawable/btnbackgrounds"
                 android:textStyle="bold"
                 android:text="Choose image" />
 
@@ -225,6 +250,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
+        android:gravity="center"
+        android:textColorHint="#FFFFFF"
+        android:textColor="#FFFFFF"
         android:ems="10"
         android:hint="More details about the dog:"
         android:textStyle="bold"
@@ -235,15 +263,33 @@
         android:layout_height="0dp"
         android:layout_weight="0.5"/>
 
-    <Button
-        android:id="@+id/btn"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:onClick="read"
-        android:textStyle="bold"
-        android:background="@drawable/custom3"
-        android:text="Button" />
+
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:background="@drawable/btnbackgrounds"
+            android:onClick="read"
+            android:text="Button"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+    </LinearLayout>
 
 
 </LinearLayout>

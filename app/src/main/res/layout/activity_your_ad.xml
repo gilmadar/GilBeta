@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
+    android:background="@drawable/background2"
     android:layout_height="match_parent"
     tools:context=".YourAd">
 
@@ -13,9 +14,12 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:textStyle="bold"
+        android:gravity="center"
         android:ems="10"
         android:inputType="textPersonName"
         android:textColorHint="#000000"
+        android:textColor="#000000"
+
         android:hint="The Name Of The Dog:"
         />
 
@@ -25,6 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:gravity="center"
         android:ems="10"
         android:hint="Age:"
         android:inputType="numberDecimal"
@@ -46,6 +51,7 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:textStyle="bold"
+            android:gravity="center"
             android:textColor="#000000"
 
             android:text="Tame: " />
@@ -87,6 +93,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
+            android:gravity="center"
             android:textStyle="bold"
             android:textColor="#000000"
 
@@ -130,6 +137,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:textStyle="bold"
+            android:gravity="center"
             android:textColor="#000000"
 
             android:text="Size: " />
@@ -152,6 +160,7 @@
         android:layout_weight="1"
         android:ems="10"
         android:textColor="#000000"
+        android:gravity="center"
 
         android:textColorHint="#000000"
         android:textStyle="bold"
@@ -171,6 +180,7 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textColor="#000000"
+            android:gravity="center"
             android:layout_weight="5"
             android:text="To select the dog breed, click the breed button" />
 
@@ -179,7 +189,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:background="@drawable/custom3"
+            android:background="@drawable/btnbackgrounds"
             android:onClick="FindBreed"
             android:textStyle="bold"
             android:text="to change breed" />
@@ -217,7 +227,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:background="@drawable/custom3"
+                android:background="@drawable/btnbackgrounds"
+
                 android:textStyle="bold"
                 android:text="to change image" />
 
@@ -237,9 +248,10 @@
         android:layout_weight="2"
         android:ems="10"
         android:hint="More details about the dog:"
+        android:gravity="center"
         android:textStyle="bold"
-        android:textColorHint="#000000"
-        android:textColor="#000000"
+        android:textColorHint="#FFFFFF"
+        android:textColor="#FFFFFF"
         android:inputType="textPersonName" />
 
     <Space
@@ -258,6 +270,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/btnbackgrounds"
             android:onClick="read"
             android:textStyle="bold"
             android:text="Change" />
@@ -268,6 +281,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:textStyle="bold"
+            android:background="@drawable/btnbackgrounds"
+
 
             android:onClick="del"
             android:text="Delete" />
@@ -276,6 +291,8 @@
             android:id="@+id/button6"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:background="@drawable/btnbackgrounds"
+
             android:layout_weight="1"
             android:textStyle="bold"
 
