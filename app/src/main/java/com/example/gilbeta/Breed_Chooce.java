@@ -15,6 +15,7 @@ public class Breed_Chooce extends AppCompatActivity implements AdapterView.OnIte
 
     ListView lv;
     String text2;
+    Intent dt;
 
 
     @Override
@@ -27,6 +28,7 @@ public class Breed_Chooce extends AppCompatActivity implements AdapterView.OnIte
         lv.setOnItemClickListener(this);
         lv.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         lv.setAdapter(adp);
+        dt = getIntent();
         //act= dt.getIntExtra("moser",999);
         //act= dt.getIntExtra("Ad",9999);
 
@@ -38,12 +40,11 @@ public class Breed_Chooce extends AppCompatActivity implements AdapterView.OnIte
 
          text2 = parent.getItemAtPosition(position).toString();
          Toast.makeText(parent.getContext(), text2, Toast.LENGTH_SHORT).show();
+         dt.putExtra("Breed", text2);
+        setResult(RESULT_OK,dt);
     }
 
     public void Back(View view) {
-        Intent dt = getIntent();
-        dt.putExtra("Breed", text2);
-        setResult(RESULT_OK,dt);
         finish();
     }
 }

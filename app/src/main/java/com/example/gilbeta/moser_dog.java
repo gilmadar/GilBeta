@@ -65,7 +65,7 @@ import static com.example.gilbeta.FBref.refUpload;
 
 public class moser_dog extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     String Breed, SizeDog, City, Age, FullName, PhoneNumber, Email, Description = " ", DogName, UID ;
-    Boolean tame, Vaccinated;
+    Boolean tame, Vaccinated,photo = false;
     RadioButton rbYes, rbNo, rbYes2, rbNo2;
     EditText etCity, age, EtDescription, Dog;
     Upload Upload;
@@ -166,6 +166,7 @@ public class moser_dog extends AppCompatActivity implements AdapterView.OnItemSe
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
                 imageView.setImageBitmap(bitmap);
+                photo = true;
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -223,7 +224,7 @@ public class moser_dog extends AppCompatActivity implements AdapterView.OnItemSe
 
 
         if(TextUtils.isEmpty(City) || TextUtils.isEmpty(Age) || TextUtils.isEmpty(Breed) ||
-                (!rbYes2.isChecked() && !rbNo2.isChecked()) || (!rbYes.isChecked() && !rbNo.isChecked()) ||  SizeDog.equals("None")){
+                (!rbYes2.isChecked() && !rbNo2.isChecked()) || (!rbYes.isChecked() && !rbNo.isChecked()) ||  SizeDog.equals("None") || photo==false){
             Toast.makeText(this, "You must fill in all fields", Toast.LENGTH_LONG).show();
         }
         else {

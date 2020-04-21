@@ -150,6 +150,14 @@ public class profile extends AppCompatActivity implements AdapterView.OnItemSele
         etphone.setHint(PhoneNumber);
         etmail.setHint(Email);
 
+        for(int i = 0; i<alupload.size(); i++){
+            alupload.get(i).setFullName(FullName);
+            alupload.get(i).setPhoneNumber(PhoneNumber);
+            alupload.get(i).setEmail(Email);
+            refUpload.child(""+alupload.get(i).getSerialNumbe()).setValue(alupload.get(i));
+
+        }
+
         userdb=new User(FullName,Email,PhoneNumber,UID);
         refUsers.child(UID).setValue(userdb);
 

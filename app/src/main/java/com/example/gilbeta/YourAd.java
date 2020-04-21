@@ -56,8 +56,8 @@ public class YourAd extends AppCompatActivity implements AdapterView.OnItemSelec
     Button btn_choose2;
     AlertDialog.Builder adb;
 
-    Uri filePath;
     Upload upload = new Upload();
+    Uri filePath;
     StorageReference mStorageRef;
     public static StorageReference Ref;
 

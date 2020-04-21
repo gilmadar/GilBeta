@@ -104,9 +104,9 @@ import static com.example.gilbeta.FBref.refUsers;
             dt.putExtra("City", up.getCity());
             dt.putExtra("Description", up.getDescription());
             dt.putExtra("DogName", up.getDogName());
-            dt.putExtra("Email", Email);
-            dt.putExtra("FullName", FullName);
-            dt.putExtra("PhoneNumber", PhoneNumber);
+            dt.putExtra("Email", up.getEmail());
+            dt.putExtra("FullName", up.getFullName());
+            dt.putExtra("PhoneNumber", up.getPhoneNumber());
             dt.putExtra("SizeDog", up.getSizeDog());
             dt.putExtra("tame", up.gettame());
             dt.putExtra("Vaccinated", up.getVaccinated());
@@ -145,4 +145,7 @@ import static com.example.gilbeta.FBref.refUsers;
             return super.onOptionsItemSelected(item);
         }
 
-}
+        public void back(View view) {
+            finish();
+        }
+    }
