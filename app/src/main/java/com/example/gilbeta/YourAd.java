@@ -55,6 +55,7 @@ public class YourAd extends AppCompatActivity implements AdapterView.OnItemSelec
     ImageView myImage2;
     Button btn_choose2;
     AlertDialog.Builder adb;
+    TextView viewcount;
 
     Upload upload = new Upload();
     Uri filePath;
@@ -79,6 +80,8 @@ public class YourAd extends AppCompatActivity implements AdapterView.OnItemSelec
         EtDescription2 = findViewById(R.id.Description2);
         tvbreed2 = findViewById(R.id.tvbreed2);
         size= findViewById(R.id.size);
+        viewcount= findViewById(R.id.viewcount);
+
 
         myImage2 = findViewById(R.id.myImage2);
         Spinner size_spinner2 = findViewById(R.id.size_spinner2);
@@ -153,9 +156,11 @@ public class YourAd extends AppCompatActivity implements AdapterView.OnItemSelec
             tame = upload.gettame();
             Vaccinated = upload.getVaccinated();
             SerialNumbe = upload.getSerialNumbe();
+            viewcount.setText("number viewers: " + upload.getViewers());
             Dog2.setHint("The Name Of The Dog: " + DogName);
             age2.setHint("Age: " + Age);
             EtDescription2.setHint("More details about the dog: " +Description);
+
             size.setText("The dog size: " + SizeDog);
             if(tame)
                 rbYes3.setChecked(true);

@@ -66,8 +66,8 @@ import static com.example.gilbeta.FBref.refUpload;
 public class moser_dog extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     String Breed, SizeDog, City, Age, FullName, PhoneNumber, Email, Description = " ", DogName, UID ;
     Boolean tame, Vaccinated,photo = false;
-    RadioButton rbYes, rbNo, rbYes2, rbNo2;
-    EditText etCity, age, EtDescription, Dog;
+    RadioButton isTame, notTame, isVaccinated, notVaccinated;
+    EditText etCity, age, EtDescription, etDogName;
     Upload Upload;
     User user = new User();
     TextView tvBreed;
@@ -91,13 +91,13 @@ public class moser_dog extends AppCompatActivity implements AdapterView.OnItemSe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_moser_dog);
 
-        rbYes = findViewById(R.id.rbYes);
-        rbNo = findViewById(R.id.rbNo);
-        rbYes2 = findViewById(R.id.rbYes2);
-        rbNo2 = findViewById(R.id.rbNo2);
+        isTame = findViewById(R.id.isTame);
+        notTame = findViewById(R.id.notTame);
+        isVaccinated = findViewById(R.id.isVaccinated);
+        notVaccinated = findViewById(R.id.notVaccinated);
         etCity = findViewById(R.id.etCity);
         age = findViewById(R.id.age);
-        Dog = findViewById(R.id.Dog);
+        etDogName = findViewById(R.id.etDogName);
         tvBreed = findViewById(R.id.tvBreed);
 
 
@@ -193,7 +193,7 @@ public class moser_dog extends AppCompatActivity implements AdapterView.OnItemSe
 
 
     public void read(View view) {
-        if (rbYes.isChecked()) {
+        if (isTame.isChecked()) {
             tame = true;
         } else {
 
@@ -201,22 +201,22 @@ public class moser_dog extends AppCompatActivity implements AdapterView.OnItemSe
 
         }
 
-        if (!rbYes.isChecked() && !rbNo.isChecked()) {
+        if (!isTame.isChecked() && !notTame.isChecked()) {
             Toast.makeText(this, "You must mark whether the dog is tame or not", Toast.LENGTH_LONG).show();
         }
-        if (rbYes2.isChecked()) {
+        if (isVaccinated.isChecked()) {
             Vaccinated = true;
         } else {
             Vaccinated = false;
         }
 
-        if (!rbYes2.isChecked() && !rbNo2.isChecked())
+        if (!isVaccinated.isChecked() && !notVaccinated.isChecked())
             Toast.makeText(this, "You must mark whether the dog is vaccinated or not", Toast.LENGTH_LONG).show();
 
         City = etCity.getText().toString();
         Age = age.getText().toString();
         Description = EtDescription.getText().toString();
-        DogName = Dog.getText().toString();
+        DogName = etDogName.getText().toString();
 
 
 
@@ -224,7 +224,7 @@ public class moser_dog extends AppCompatActivity implements AdapterView.OnItemSe
 
 
         if(TextUtils.isEmpty(City) || TextUtils.isEmpty(Age) || TextUtils.isEmpty(Breed) ||
-                (!rbYes2.isChecked() && !rbNo2.isChecked()) || (!rbYes.isChecked() && !rbNo.isChecked()) ||  SizeDog.equals("None") || photo==false){
+                (!isVaccinated.isChecked() && !notVaccinated.isChecked()) || (!isTame.isChecked() && !notTame.isChecked()) ||  SizeDog.equals("None") || photo==false){
             Toast.makeText(this, "You must fill in all fields", Toast.LENGTH_LONG).show();
         }
         else {
@@ -236,7 +236,7 @@ public class moser_dog extends AppCompatActivity implements AdapterView.OnItemSe
                     if(dataSnapshot.exists()) {
                         count = dataSnapshot.getChildrenCount();
                         count = count + 1;
-                        Upload = new Upload(Breed, SizeDog, City, tame, Vaccinated, Age, FullName, PhoneNumber, Email, Description, DogName, UID,count, true);
+                        Upload = new Upload(Breed, SizeDog, City, tame, Vaccinated, Age, FullName, PhoneNumber, Email, Description, DogName, UID,count, true, 0);
                         refUpload.child(""+count).setValue(Upload);
                         Toast.makeText(moser_dog.this, "Successful upload", Toast.LENGTH_LONG).show();
                         Intent it = new Intent(moser_dog.this, profile.class);
@@ -244,7 +244,7 @@ public class moser_dog extends AppCompatActivity implements AdapterView.OnItemSe
                     }
                     else{
                         count = 1;
-                        Upload = new Upload(Breed, SizeDog, City, tame, Vaccinated, Age, FullName, PhoneNumber, Email, Description, DogName, UID,count, true);
+                        Upload = new Upload(Breed, SizeDog, City, tame, Vaccinated, Age, FullName, PhoneNumber, Email, Description, DogName, UID,count, true, 0);
                         refUpload.child(""+count).setValue(Upload);
                         Toast.makeText(moser_dog.this, "Successful upload", Toast.LENGTH_LONG).show();
                         Intent it2 = new Intent(moser_dog.this, profile.class);

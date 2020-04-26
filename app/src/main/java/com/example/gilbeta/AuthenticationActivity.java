@@ -66,6 +66,7 @@ public class AuthenticationActivity extends AppCompatActivity {
         regoption();
     }
 
+
     protected void onStart() {
         super.onStart();
         SharedPreferences settings=getSharedPreferences("PREFS_NAME",MODE_PRIVATE);
@@ -74,7 +75,7 @@ public class AuthenticationActivity extends AppCompatActivity {
         si.putExtra("newuser",false);
         if (refAuth.getCurrentUser()!=null && isChecked) {
             stayConnect=true;
-            //startActivity(si);
+            startActivity(si);
         }
 
 

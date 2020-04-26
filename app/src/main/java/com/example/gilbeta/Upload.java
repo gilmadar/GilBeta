@@ -7,10 +7,11 @@ public class Upload {
     private String Breed, SizeDog, City, FullName, PhoneNumber, Age, Email, Description,DogName, UID;
     private boolean tame, Vaccinated,act;
     Long SerialNumbe;
+    long viewers;
     public Upload(){}
     public Upload(String Breed, String SizeDog, String City, boolean tame, boolean Vaccinated,
                   String Age, String FullName, String PhoneNumber, String Email,
-                  String Description, String DogName, String UID, Long SerialNumbe, boolean act){
+                  String Description, String DogName, String UID, Long SerialNumbe, boolean act, long viewers){
         this.FullName = FullName;
         this.PhoneNumber = PhoneNumber;
         this.Email = Email;
@@ -25,6 +26,7 @@ public class Upload {
         this.UID = UID;
         this.SerialNumbe = SerialNumbe;
         this.act = act;
+        this.viewers = viewers;
 
 
     }
@@ -138,6 +140,14 @@ public class Upload {
 
     public void setAct(boolean act) {
         this.act = act;
+    }
+
+    public long getViewers() {
+        return viewers;
+    }
+
+    public void setViewers(long viewers) {
+        this.viewers = viewers;
     }
 
     public void copyUpload(Upload upload){

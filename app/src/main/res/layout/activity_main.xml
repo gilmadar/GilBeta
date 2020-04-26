@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textStyle="bold"
-        android:text="DogiStyle"
+        android:text="DogWorld"
         android:textColor="#ff6666
 "
         android:textSize="30dp" />

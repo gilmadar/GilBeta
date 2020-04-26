@@ -28,5 +28,33 @@
         <item>Eurasier</item>
     </string-array>
 
+    <string-array name="From">
+        <item>From: </item>
+        <item>From: 1</item>
+        <item>From: 2</item>
+        <item>From: 3</item>
+        <item>From: 4</item>
+        <item>From: 5</item>
+        <item>From: 6</item>
+        <item>From: 7</item>
+        <item>From: 8</item>
+        <item>From: 9</item>
+        <item>From: 10</item>
+    </string-array>
+
+    <string-array name="To">
+        <item>To: </item>
+        <item>To: 1</item>
+        <item>To: 2</item>
+        <item>To: 3</item>
+        <item>To: 4</item>
+        <item>To: 5</item>
+        <item>To: 6</item>
+        <item>To: 7</item>
+        <item>To: 8</item>
+        <item>To: 9</item>
+        <item>To: 10</item>
+    </string-array>
+
 
 </resources>
