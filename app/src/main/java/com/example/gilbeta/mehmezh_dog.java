@@ -269,7 +269,21 @@ import static com.example.gilbeta.FBref.refUsers;
                     else {
                         if (als.isEmpty()) {
                             Toast.makeText(mehmezh_dog.this, "There are no ads that match your requirements", Toast.LENGTH_SHORT).show();
-                        } else {
+                            size_spinner.setAdapter(adapter2);
+                            rgtame.clearCheck();
+                            rgvaccinated.clearCheck();
+                            size = "" ;
+                            breed = "";
+                            tame2 = false;
+                            vaccinated2 = false;
+                            ifbreed2 = false;
+                            size2 = false;
+                            tvBreed3.setText("To select the dog breed, click the breed button");
+                            ArrayAdapter<String> adp = new ArrayAdapter<String>(mehmezh_dog.this, R.layout.support_simple_spinner_dropdown_item, alsnew);
+                            lv.setAdapter(adp);
+
+                        }
+                        else {
                             ArrayAdapter<String> adp = new ArrayAdapter<String>(mehmezh_dog.this, R.layout.support_simple_spinner_dropdown_item, als);
                             lv.setAdapter(adp);
                         }
