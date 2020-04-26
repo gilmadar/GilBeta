@@ -47,7 +47,6 @@ import static com.example.gilbeta.FBref.refUsers;
         ArrayAdapter<CharSequence> adapter2;
 
         ArrayList<Upload> alupload = new ArrayList<>();
-        ArrayList<Integer> del = new ArrayList<>();
         long count;
 
         RadioButton isTameSearch, notTameSearch, isVaccinatedSearch, notVaccinatedSearch;
@@ -55,8 +54,7 @@ import static com.example.gilbeta.FBref.refUsers;
         String breed, size;
         boolean tame,tame3, vaccinated,vaccinated3,show,tame2 = false,vaccinated2 = false,ifbreed2 = false,ifbreed3,size2 = false, size3;
         TextView tvclear, tvsearch,tvBreed3;
-        ArrayList<Upload> aluploadnew = new ArrayList<>();
-        int from=-10,to=-10;
+
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -116,16 +114,21 @@ import static com.example.gilbeta.FBref.refUsers;
                             String DogName = upload.getDogName();
                             als.add("Name:" + DogName + ",Breed:" + Breed + ",Size:"
                                     + size);
-                            alsnew.add("Name:" + DogName + ",Breed:" + Breed + ",Size:"
-                                    + size);
+
                         }
-                        aluploadnew = alupload;
 
                     }
-                    ArrayAdapter<String> adp = new ArrayAdapter<String>(mehmezh_dog.this, R.layout.support_simple_spinner_dropdown_item, als);
+                    if (alsnew.isEmpty()) {
+                        ArrayAdapter<String> adp = new ArrayAdapter<String>(mehmezh_dog.this, R.layout.support_simple_spinner_dropdown_item, als);
+                        lv.setAdapter(adp);
+                    }
+                    else{
+                        ArrayAdapter<String> adp = new ArrayAdapter<String>(mehmezh_dog.this, R.layout.support_simple_spinner_dropdown_item, alsnew);
+                        lv.setAdapter(adp);
+                    }
+
                     lv.setOnItemClickListener(mehmezh_dog.this);
                     lv.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-                    lv.setAdapter(adp);
 
                 }
 
@@ -156,7 +159,7 @@ import static com.example.gilbeta.FBref.refUsers;
                     ifbreed2 = false;
                     size2 = false;
                     tvBreed3.setText("To select the dog breed, click the breed button");
-                    ArrayAdapter<String> adp = new ArrayAdapter<String>(mehmezh_dog.this, R.layout.support_simple_spinner_dropdown_item, alsnew);
+                    ArrayAdapter<String> adp = new ArrayAdapter<String>(mehmezh_dog.this, R.layout.support_simple_spinner_dropdown_item, als);
                     lv.setAdapter(adp);
 
 
@@ -171,7 +174,7 @@ import static com.example.gilbeta.FBref.refUsers;
             ClickableSpan span2 = new ClickableSpan() {
                 @Override
                 public void onClick(View textView) {
-                    als.clear();
+                    alsnew.clear();
 
                     /*if(!TextUtils.isEmpty(FromSearch.getText().toString()))
                         from = Integer.parseInt(FromSearch.getText().toString());
@@ -246,28 +249,19 @@ import static com.example.gilbeta.FBref.refUsers;
                        // if(!tame2 && !vaccinated2 && !ifbreed2 && !size2)
 
                         if(tame3 && vaccinated3 && ifbreed3 && size3){
-                            als.add("Name:" + alupload.get(i).getDogName() + ",Breed:" + alupload.get(i).getBreed() + ",Size:"
+                            alsnew.add("Name:" + alupload.get(i).getDogName() + ",Breed:" + alupload.get(i).getBreed() + ",Size:"
                                     + alupload.get(i).getSizeDog());
                         }
 
                     }
-                    /*for(int i = 0; i<del.size(); i++){
-                        aluploadnew.remove(del.get(i));
-                    }
 
-
-                    for(int i = 0; i<aluploadnew.size(); i++){
-                        als.add("Name:" + aluploadnew.get(i).getDogName() + ",Breed:" + aluploadnew.get(i).getBreed() + ",Size:"
-                                + aluploadnew.get(i).getSizeDog());
-
-                    }*/
 
 
                     if (!tame2 && !vaccinated2 && !ifbreed2 && !size2){
                         Toast.makeText(mehmezh_dog.this, "You have not selected the filter", Toast.LENGTH_SHORT).show();
                     }
                     else {
-                        if (als.isEmpty()) {
+                        if (alsnew.isEmpty()) {
                             Toast.makeText(mehmezh_dog.this, "There are no ads that match your requirements", Toast.LENGTH_SHORT).show();
                             size_spinner.setAdapter(adapter2);
                             rgtame.clearCheck();
@@ -279,12 +273,12 @@ import static com.example.gilbeta.FBref.refUsers;
                             ifbreed2 = false;
                             size2 = false;
                             tvBreed3.setText("To select the dog breed, click the breed button");
-                            ArrayAdapter<String> adp = new ArrayAdapter<String>(mehmezh_dog.this, R.layout.support_simple_spinner_dropdown_item, alsnew);
+                            ArrayAdapter<String> adp = new ArrayAdapter<String>(mehmezh_dog.this, R.layout.support_simple_spinner_dropdown_item, als);
                             lv.setAdapter(adp);
 
                         }
                         else {
-                            ArrayAdapter<String> adp = new ArrayAdapter<String>(mehmezh_dog.this, R.layout.support_simple_spinner_dropdown_item, als);
+                            ArrayAdapter<String> adp = new ArrayAdapter<String>(mehmezh_dog.this, R.layout.support_simple_spinner_dropdown_item, alsnew);
                             lv.setAdapter(adp);
                         }
                     }
@@ -377,7 +371,7 @@ import static com.example.gilbeta.FBref.refUsers;
 
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             size = parent.getItemAtPosition(position).toString();
-            Toast.makeText(parent.getContext(), size, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(parent.getContext(), size, Toast.LENGTH_SHORT).show();
             // קורא מהספינר מה נבחר ושומר במשתנה SizeDog
         }
         @Override
