@@ -75,7 +75,7 @@ public class AuthenticationActivity extends AppCompatActivity {
         si.putExtra("newuser",false);
         if (refAuth.getCurrentUser()!=null && isChecked) {
             stayConnect=true;
-            startActivity(si);
+           // startActivity(si);
         }
 
 
