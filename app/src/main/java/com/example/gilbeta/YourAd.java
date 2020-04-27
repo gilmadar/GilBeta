@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -159,7 +160,7 @@ public class YourAd extends AppCompatActivity implements AdapterView.OnItemSelec
             viewcount.setText("number viewers: " + upload.getViewers());
             Dog2.setHint("The Name Of The Dog: " + DogName);
             age2.setHint("Age: " + Age);
-            EtDescription2.setHint("More details about the dog: " +Description);
+            EtDescription2.setHint(Description);
 
             size.setText("The dog size: " + SizeDog);
             if(tame)

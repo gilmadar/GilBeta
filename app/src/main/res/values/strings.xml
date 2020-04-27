@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GilBeta</string>
+    <string name="app_name">DogWorld</string>
     <string-array name="yes_no">
         <item>Null</item>
         <item>Yes</item>

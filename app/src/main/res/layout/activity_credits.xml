@@ -28,10 +28,10 @@
         android:id="@+id/textView10"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1.5"
+        android:layout_weight="1.7"
         android:gravity=""
         android:padding="20dp"
-        android:text="App name : asdasdasdas"
+        android:text="App name : DogWorld"
         android:textColor="#ffff"
         android:textSize="25dp"
         android:textStyle="italic" />
