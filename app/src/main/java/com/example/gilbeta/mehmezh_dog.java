@@ -16,9 +16,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -45,6 +48,8 @@ import static com.example.gilbeta.FBref.refUsers;
         ArrayList<String> alsnew = new ArrayList<>();
         Spinner size_spinner;
         ArrayAdapter<CharSequence> adapter2;
+        ArrayAdapter<String> adp;
+        SpannableString ss,ss2,ssfilter,ssnofilter;
 
         ArrayList<Upload> alupload = new ArrayList<>();
         long count;
@@ -53,7 +58,14 @@ import static com.example.gilbeta.FBref.refUsers;
         RadioGroup rgtame,rgvaccinated;
         String breed, size;
         boolean tame,tame3, vaccinated,vaccinated3,show,tame2 = false,vaccinated2 = false,ifbreed2 = false,ifbreed3,size2 = false, size3;
-        TextView tvclear, tvsearch,tvBreed3;
+        TextView tvclear, tvsearch,tvBreed3, tvfilter;
+        LinearLayout LLfilter;
+        /*
+        tame2,vaccinated2,ifbreed2,size2 - תפקידם לבדוק האם המשתמש בחר לסנן לפי השדדות האלו
+        tame3,vaccinated3,ifbreed3,size3 -
+        תפקידם לבדוק האם המודעה ברשימת המודעות תואמות בשדות בהתאם למשל אם הגודל שהמשתמש בחר בסינון תואם לגודל של מודעה מרשימת המודעות אז המשתנים מקבלים אמת
+
+         */
 
 
         @Override
@@ -67,6 +79,10 @@ import static com.example.gilbeta.FBref.refUsers;
             tvBreed3 = (TextView) findViewById(R.id.tvBreed3);
             rgtame = (RadioGroup) findViewById(R.id.rgtame);
             rgvaccinated = (RadioGroup) findViewById(R.id.rgvaccinated);
+            tvfilter  = findViewById(R.id.tvfilter);
+            LLfilter = findViewById(R.id.LLfilter);
+
+
 
 
             size_spinner = findViewById(R.id.size_spinner);
@@ -78,6 +94,11 @@ import static com.example.gilbeta.FBref.refUsers;
             notTameSearch = findViewById(R.id.notTameSearch);
             isVaccinatedSearch = findViewById(R.id.isVaccinatedSearch);
             notVaccinatedSearch = findViewById(R.id.notVaccinatedSearch);
+
+            filter();
+
+
+
 
 
 
@@ -119,11 +140,11 @@ import static com.example.gilbeta.FBref.refUsers;
 
                     }
                     if (alsnew.isEmpty()) {
-                        ArrayAdapter<String> adp = new ArrayAdapter<String>(mehmezh_dog.this, R.layout.support_simple_spinner_dropdown_item, als);
+                        adp = new ArrayAdapter<String>(mehmezh_dog.this, R.layout.support_simple_spinner_dropdown_item, als);
                         lv.setAdapter(adp);
                     }
                     else{
-                        ArrayAdapter<String> adp = new ArrayAdapter<String>(mehmezh_dog.this, R.layout.support_simple_spinner_dropdown_item, alsnew);
+                        adp = new ArrayAdapter<String>(mehmezh_dog.this, R.layout.support_simple_spinner_dropdown_item, alsnew);
                         lv.setAdapter(adp);
                     }
 
@@ -143,11 +164,10 @@ import static com.example.gilbeta.FBref.refUsers;
 
             //
             tvclear.setText("Clear");
-            SpannableString ss = new SpannableString("Clear");
+            ss = new SpannableString("Clear");
             ClickableSpan span = new ClickableSpan() {
                 @Override
                 public void onClick(View textView) {
-                    Toast.makeText(mehmezh_dog.this, "There are no ads that match your requirements", Toast.LENGTH_SHORT).show();
 
                     size_spinner.setAdapter(adapter2);
                     rgtame.clearCheck();
@@ -159,7 +179,7 @@ import static com.example.gilbeta.FBref.refUsers;
                     ifbreed2 = false;
                     size2 = false;
                     tvBreed3.setText("To select the dog breed, click the breed button");
-                    ArrayAdapter<String> adp = new ArrayAdapter<String>(mehmezh_dog.this, R.layout.support_simple_spinner_dropdown_item, als);
+                    adp = new ArrayAdapter<String>(mehmezh_dog.this, R.layout.support_simple_spinner_dropdown_item, als);
                     lv.setAdapter(adp);
 
 
@@ -170,16 +190,12 @@ import static com.example.gilbeta.FBref.refUsers;
             tvclear.setMovementMethod(LinkMovementMethod.getInstance());
 
             tvsearch.setText("Search");
-            SpannableString ss2 = new SpannableString("Search");
+            ss2 = new SpannableString("Search");
             ClickableSpan span2 = new ClickableSpan() {
                 @Override
                 public void onClick(View textView) {
                     alsnew.clear();
 
-                    /*if(!TextUtils.isEmpty(FromSearch.getText().toString()))
-                        from = Integer.parseInt(FromSearch.getText().toString());
-                    if(!TextUtils.isEmpty(FromSearch.getText().toString()))
-                        to = Integer.parseInt(ToSearch.getText().toString());*/
                     if(isTameSearch.isChecked() || notTameSearch.isChecked()){
                         tame2 = true;
                         if(isTameSearch.isChecked())
@@ -246,7 +262,6 @@ import static com.example.gilbeta.FBref.refUsers;
                             }
                         }
 
-                       // if(!tame2 && !vaccinated2 && !ifbreed2 && !size2)
 
                         if(tame3 && vaccinated3 && ifbreed3 && size3){
                             alsnew.add("Name:" + alupload.get(i).getDogName() + ",Breed:" + alupload.get(i).getBreed() + ",Size:"
@@ -273,12 +288,12 @@ import static com.example.gilbeta.FBref.refUsers;
                             ifbreed2 = false;
                             size2 = false;
                             tvBreed3.setText("To select the dog breed, click the breed button");
-                            ArrayAdapter<String> adp = new ArrayAdapter<String>(mehmezh_dog.this, R.layout.support_simple_spinner_dropdown_item, als);
+                            adp = new ArrayAdapter<String>(mehmezh_dog.this, R.layout.support_simple_spinner_dropdown_item, als);
                             lv.setAdapter(adp);
 
                         }
                         else {
-                            ArrayAdapter<String> adp = new ArrayAdapter<String>(mehmezh_dog.this, R.layout.support_simple_spinner_dropdown_item, alsnew);
+                            adp = new ArrayAdapter<String>(mehmezh_dog.this, R.layout.support_simple_spinner_dropdown_item, alsnew);
                             lv.setAdapter(adp);
                         }
                     }
@@ -292,6 +307,41 @@ import static com.example.gilbeta.FBref.refUsers;
             ss2.setSpan(span2, 0, 6, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             tvsearch.setText(ss2);
             tvsearch.setMovementMethod(LinkMovementMethod.getInstance());
+        }
+
+        private void filter(){
+            ssfilter = new SpannableString("To filter ads click here");
+            ClickableSpan span = new ClickableSpan() {
+                @Override
+                public void onClick(View textView) {
+                    LLfilter.setVisibility(View.VISIBLE);
+
+                    notfilter();
+
+                }
+            };
+            ssfilter.setSpan(span, 14, 24, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            tvfilter.setText(ssfilter);
+            tvfilter.setMovementMethod(LinkMovementMethod.getInstance());
+
+
+        }
+
+        private void notfilter(){
+            ssnofilter = new SpannableString("To close filtering click here");
+            ClickableSpan span = new ClickableSpan() {
+                @Override
+                public void onClick(View textView) {
+                    LLfilter.setVisibility(View.INVISIBLE);
+
+                    filter();
+
+                }
+            };
+            ssnofilter.setSpan(span, 19, 29, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            tvfilter.setText(ssnofilter);
+            tvfilter.setMovementMethod(LinkMovementMethod.getInstance());
+
         }
 
 
