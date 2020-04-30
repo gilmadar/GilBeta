@@ -13,7 +13,7 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static int SPLASH_TIME_OUT = 3000;
+    private static int SPLASH_TIME_OUT = 3000; //  שניות 3
     ProgressBar pb;
     int counter = 0;
 

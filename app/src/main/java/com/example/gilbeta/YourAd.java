@@ -252,6 +252,7 @@ public class YourAd extends AppCompatActivity implements AdapterView.OnItemSelec
             @Override
             public void onSuccess(Uri uri) {
                 Picasso.with(YourAd.this).load(uri).fit().centerCrop().into(myImage2);
+
             }
 
 

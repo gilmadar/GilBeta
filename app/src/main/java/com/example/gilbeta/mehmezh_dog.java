@@ -333,7 +333,8 @@ import static com.example.gilbeta.FBref.refUsers;
                 @Override
                 public void onClick(View textView) {
                     LLfilter.setVisibility(View.INVISIBLE);
-
+                    adp = new ArrayAdapter<String>(mehmezh_dog.this, R.layout.support_simple_spinner_dropdown_item, als);
+                    lv.setAdapter(adp);
                     filter();
 
                 }

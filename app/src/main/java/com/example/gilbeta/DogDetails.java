@@ -51,7 +51,7 @@ public class DogDetails extends AppCompatActivity {
 
      TextView tvBreed, tvSize, tvCity, tvAge, tvDescription, tvDogName, tvtame, tvVaccinated;
 
-    AlertDialog.Builder alert;
+
 
 
     //ArrayList<String> als = new ArrayList<>();
