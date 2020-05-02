@@ -10,6 +10,7 @@ import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -359,6 +360,7 @@ public class moser_dog extends AppCompatActivity implements AdapterView.OnItemSe
             t = new Intent(this, Credits.class);
             startActivity(t);
         }
+
         return super.onOptionsItemSelected(item);
     }
 

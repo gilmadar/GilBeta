@@ -52,7 +52,10 @@ import static com.example.gilbeta.FBref.refUsers;
         SpannableString ss,ss2,ssfilter,ssnofilter;
 
         ArrayList<Upload> alupload = new ArrayList<>();
-        long count;
+        ArrayList<Upload> aluploadfilter = new ArrayList<>();
+        ArrayList<Upload> alupload2 = new ArrayList<>();
+
+
 
         RadioButton isTameSearch, notTameSearch, isVaccinatedSearch, notVaccinatedSearch;
         RadioGroup rgtame,rgvaccinated;
@@ -64,7 +67,6 @@ import static com.example.gilbeta.FBref.refUsers;
         tame2,vaccinated2,ifbreed2,size2 - תפקידם לבדוק האם המשתמש בחר לסנן לפי השדדות האלו
         tame3,vaccinated3,ifbreed3,size3 -
         תפקידם לבדוק האם המודעה ברשימת המודעות תואמות בשדות בהתאם למשל אם הגודל שהמשתמש בחר בסינון תואם לגודל של מודעה מרשימת המודעות אז המשתנים מקבלים אמת
-
          */
 
 
@@ -123,12 +125,16 @@ import static com.example.gilbeta.FBref.refUsers;
                 @Override
                 public void onDataChange(@NonNull DataSnapshot ds) {
                     als.clear();
-                    alupload.clear();
+                    //alupload.clear();
+                    alupload2.clear();
+                    if (!ds.exists())
+                        Toast.makeText(mehmezh_dog.this, "There are no ads to display", Toast.LENGTH_SHORT).show();
                     for (DataSnapshot data : ds.getChildren()) {
                         String UID = (String) data.getKey();
                         Upload upload = data.getValue(Upload.class);
                         if (upload.isAct()) {
-                            alupload.add(upload);
+                      //      alupload.add(upload);
+                            alupload2.add(upload);
                             String Breed = upload.getBreed();
                             String size = upload.getSizeDog();
                             //String age = upload.getAge();
@@ -142,10 +148,12 @@ import static com.example.gilbeta.FBref.refUsers;
                     if (alsnew.isEmpty()) {
                         adp = new ArrayAdapter<String>(mehmezh_dog.this, R.layout.support_simple_spinner_dropdown_item, als);
                         lv.setAdapter(adp);
+                        alupload = alupload2;
                     }
                     else{
                         adp = new ArrayAdapter<String>(mehmezh_dog.this, R.layout.support_simple_spinner_dropdown_item, alsnew);
                         lv.setAdapter(adp);
+                        alupload = aluploadfilter;
                     }
 
                     lv.setOnItemClickListener(mehmezh_dog.this);
@@ -168,6 +176,9 @@ import static com.example.gilbeta.FBref.refUsers;
             ClickableSpan span = new ClickableSpan() {
                 @Override
                 public void onClick(View textView) {
+                    alsnew.clear();
+                    aluploadfilter.clear();
+                    alupload = alupload2;
 
                     size_spinner.setAdapter(adapter2);
                     rgtame.clearCheck();
@@ -195,6 +206,7 @@ import static com.example.gilbeta.FBref.refUsers;
                 @Override
                 public void onClick(View textView) {
                     alsnew.clear();
+                    aluploadfilter.clear();
 
                     if(isTameSearch.isChecked() || notTameSearch.isChecked()){
                         tame2 = true;
@@ -216,14 +228,14 @@ import static com.example.gilbeta.FBref.refUsers;
                         size2 = true;
 
 
-                    for(int i = 0; i<alupload.size(); i++){
+                    for(int i = 0; i<alupload2.size(); i++){
                         tame3 = true;
                         vaccinated3 = true;
                         ifbreed3 = true;
                         size3 = true;
                         show = false;
                         if(tame2){
-                            if (alupload.get(i).gettame() == tame) {
+                            if (alupload2.get(i).gettame() == tame) {
                                 tame3 = true;
                             }
                             else{
@@ -236,7 +248,7 @@ import static com.example.gilbeta.FBref.refUsers;
 
 
                         if(vaccinated2 ){
-                            if (alupload.get(i).getVaccinated() == vaccinated) {
+                            if (alupload2.get(i).getVaccinated() == vaccinated) {
                                 vaccinated3 = true;
                             }
                             else{
@@ -245,7 +257,7 @@ import static com.example.gilbeta.FBref.refUsers;
                         }
 
                         if(ifbreed2 ){
-                            if (breed.equals(alupload.get(i).getBreed())) {
+                            if (breed.equals(alupload2.get(i).getBreed())) {
                                 ifbreed3 = true;
                             }
                             else{
@@ -254,7 +266,7 @@ import static com.example.gilbeta.FBref.refUsers;
                         }
 
                         if(size2 ){
-                            if (size.equals(alupload.get(i).getSizeDog())) {
+                            if (size.equals(alupload2.get(i).getSizeDog())) {
                                 size3 = true;
                             }
                             else{
@@ -264,8 +276,9 @@ import static com.example.gilbeta.FBref.refUsers;
 
 
                         if(tame3 && vaccinated3 && ifbreed3 && size3){
-                            alsnew.add("Name:" + alupload.get(i).getDogName() + ",Breed:" + alupload.get(i).getBreed() + ",Size:"
-                                    + alupload.get(i).getSizeDog());
+                            alsnew.add("Name:" + alupload2.get(i).getDogName() + ",Breed:" + alupload2.get(i).getBreed() + ",Size:"
+                                    + alupload2.get(i).getSizeDog());
+                            aluploadfilter.add(alupload2.get(i));
                         }
 
                     }
@@ -290,11 +303,13 @@ import static com.example.gilbeta.FBref.refUsers;
                             tvBreed3.setText("To select the dog breed, click the breed button");
                             adp = new ArrayAdapter<String>(mehmezh_dog.this, R.layout.support_simple_spinner_dropdown_item, als);
                             lv.setAdapter(adp);
+                            alupload = alupload2;
 
                         }
                         else {
                             adp = new ArrayAdapter<String>(mehmezh_dog.this, R.layout.support_simple_spinner_dropdown_item, alsnew);
                             lv.setAdapter(adp);
+                            alupload = aluploadfilter;
                         }
                     }
 
