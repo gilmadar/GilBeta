@@ -29,11 +29,10 @@ public class Breed_Chooce extends AppCompatActivity implements AdapterView.OnIte
         lv.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         lv.setAdapter(adp);
         dt = getIntent();
-        //act= dt.getIntExtra("moser",999);
-        //act= dt.getIntExtra("Ad",9999);
+        /*
+        מתבצע כאן הצגת סוגי הגזעים בlistview
 
-        //        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.size, android.R.layout.simple_spinner_item);
-
+         */
     }
 
     public void onItemClick(AdapterView<?> parent, View view, int position, long id){
@@ -42,6 +41,9 @@ public class Breed_Chooce extends AppCompatActivity implements AdapterView.OnIte
          Toast.makeText(parent.getContext(), text2, Toast.LENGTH_SHORT).show();
          dt.putExtra("Breed", text2);
         setResult(RESULT_OK,dt);
+        /*
+        מתבצע בדיקה באיזה גזע המשתמש בחר ומעביר את הערך למסך שממנו המשתמש הגיע
+        */
     }
 
     public void Back(View view) {

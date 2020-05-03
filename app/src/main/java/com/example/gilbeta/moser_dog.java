@@ -115,7 +115,7 @@ public class moser_dog extends AppCompatActivity implements AdapterView.OnItemSe
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         size_spinner.setAdapter(adapter2);
         size_spinner.setOnItemSelectedListener(this);
-        // קורא בספינר "קטן/בינוני/גדול
+        // מכניס לספינר ערכים "קטן/בינוני/גדול"
 
         FirebaseUser firebaseUser = refAuth.getCurrentUser();
         refUsers.child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -125,7 +125,7 @@ public class moser_dog extends AppCompatActivity implements AdapterView.OnItemSe
                 PhoneNumber = user.getPhone();
                 Email = user.getEmail();
                 UID = user.getUid();
-                // קורא מידע מהפיירבייס
+                // קורא מידע מהפיירבייס את הפרטים האישיים של המשתמש מUser
             }
 
             @Override
@@ -149,6 +149,9 @@ public class moser_dog extends AppCompatActivity implements AdapterView.OnItemSe
        intent.setType("image/*");
        intent.setAction(Intent.ACTION_GET_CONTENT);
        startActivityForResult(Intent.createChooser(intent, "Select Image"), 1);
+       /*
+       מתבצע פתיחה של "מסך" הגלריה
+        */
     }
 
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -157,7 +160,9 @@ public class moser_dog extends AppCompatActivity implements AdapterView.OnItemSe
             Breed = data.getStringExtra("Breed");
             tvBreed.setText("The breed of the dog: " + Breed);
             Toast.makeText(this, Breed, Toast.LENGTH_SHORT).show();
-
+            /*
+            מקבל ממסך בחירת הגזע את הגזע שבחר המשתמש, שומר אותו ומציג אותו למשתמש בToast
+             */
 
         }
 
@@ -171,6 +176,9 @@ public class moser_dog extends AppCompatActivity implements AdapterView.OnItemSe
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            /*
+            מציג למשתמש בimageview את התמונה שבחר במסך הגלריה
+             */
 
         }
     }
@@ -179,7 +187,7 @@ public class moser_dog extends AppCompatActivity implements AdapterView.OnItemSe
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         SizeDog = parent.getItemAtPosition(position).toString();
         Toast.makeText(parent.getContext(), SizeDog, Toast.LENGTH_SHORT).show();
-        // קורא מהספינר מה נבחר ושומר במשתנה SizeDog
+        // קורא מהספינר את גודל הכלב שבחר המשתמש ושומר את הערךר במשתנה SizeDog
     }
 
     @Override
@@ -190,10 +198,19 @@ public class moser_dog extends AppCompatActivity implements AdapterView.OnItemSe
 
         Intent t = new Intent(this, Breed_Chooce.class);
         startActivityForResult(t, 100);
+        // מעביר את המשתמש למסך בחירת הגזע
     }
 
 
     public void read(View view) {
+        /*
+        פעולה זאת ראשית בודקץ האם המשתמש מילא את כל השדות שחובה, אם כן מתבצע העלה לפייר בייס
+        בהעלה לפיירביס יש 2 אופציות:
+        א. אם לא קיים מודעות אז מספר הסידורי של המודעה מקבל 1
+        ב. אם קיים מודעות יש בדיקה כמה מודעות קיימות ונותן למודעה שמועלה את המס הסידורי המתאים
+        בנוסף יש העלה לfirebase storage
+        אם המשתמש לא מילא את כל השדות שחובה קופץ לו toast שעליו למלא את כל השדות
+         */
         if (isTame.isChecked()) {
             tame = true;
         } else {
@@ -218,11 +235,6 @@ public class moser_dog extends AppCompatActivity implements AdapterView.OnItemSe
         Age = age.getText().toString();
         Description = EtDescription.getText().toString();
         DogName = etDogName.getText().toString();
-
-
-
-
-
 
         if(TextUtils.isEmpty(City) || TextUtils.isEmpty(Age) || TextUtils.isEmpty(Breed) ||
                 (!isVaccinated.isChecked() && !notVaccinated.isChecked()) || (!isTame.isChecked() && !notTame.isChecked()) ||  SizeDog.equals("None") || photo==false){
